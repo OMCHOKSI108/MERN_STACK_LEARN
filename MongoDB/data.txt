@@ -4,7 +4,7 @@ MongoDB is a NoSQL database that stores data in a JSON-like format. It is a popu
 
 /////////////////////////////////////////////////////
 
-NOSQL FORMAT
+NOSQL FORMAT IT ls like a Document Format 
 
 {
  Name : "Om",
@@ -24,5 +24,18 @@ NOSQL FORMAT
  SGPA : 7.53
 }
 
+{
+    Name : "Sergio",
+    Id : "23iml040",
+    Age : 20,
+    Gender : "Male",
+    SGPA : 9.57,
+}
+
 /////////////////////////////////////////////////////
+
+
+Document = Group OF Multiple Fields
+Collection =  Group OF Multiple Documents 
+database =  Group OF Multiple Collections
 

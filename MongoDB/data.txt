@@ -1,0 +1,28 @@
+MongoDB is NoSQL - Not Only Sql . It is a document-oriented database that stores data in JSON-like documents.choice for big data and real-time web applications.
+MongoDB is a NoSQL database that stores data in a JSON-like format. It is a popular 
+
+
+/////////////////////////////////////////////////////
+
+NOSQL FORMAT
+
+{
+ Name : "Om",
+ Id : "23iml010",
+ Age : 18,
+ Gender : "Male",
+ SGPA : 7.91
+ 
+}
+
+
+{
+ Name : "Sanskruti",
+ Id : "23iml030",
+ Age : 19,
+ Gender : "Female",
+ SGPA : 7.53
+}
+
+/////////////////////////////////////////////////////
+

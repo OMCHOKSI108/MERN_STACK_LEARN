@@ -76,3 +76,165 @@ Next, under "Network Access", add your current IP address to allow access from y
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+MongoDB Comprehensive Command List
+==================================
+
+1. General MongoDB Shell Commands
+---------------------------------
+- help: Displays a list of commands and their usage in the shell.
+  Example: help
+- exit: Exits the MongoDB shell (mongosh).
+  Example: exit
+- it: Fetches the next batch of query results when using cursors.
+  Example: cursor.itcount()
+- cls: Clears the terminal screen (useful in Windows).
+  Example: cls
+- history: Displays the shell command history.
+  Example: history
+- load("filename.js"): Executes a JavaScript file in the MongoDB shell.
+  Example: load("myScript.js")
+
+2. Database Management Commands
+-------------------------------
+- show dbs: Lists all databases on the MongoDB server.
+  Example: show dbs
+- use <database>: Switches to the specified database. Creates it upon first data insert if it doesn't exist.
+  Example: use myDatabase
+- db: Displays the name of the current database.
+  Example: db
+- db.dropDatabase(): Deletes the current database.
+  Example: db.dropDatabase()
+
+3. Collection Management Commands
+---------------------------------
+- show collections: Lists all collections in the current database.
+  Example: show collections
+- db.createCollection(name, options): Creates a new collection with optional settings like size or capped limits.
+  Example: db.createCollection("myCollection")
+- db.collection.drop(): Deletes the specified collection.
+  Example: db.myCollection.drop()
+
+4. CRUD (Create, Read, Update, Delete) Operations
+-------------------------------------------------
+  4.1 Insert Commands
+  -------------------
+  - db.collection.insertOne(document): Inserts a single document into a collection.
+    Example: db.myCollection.insertOne({name: "Alice", age: 25})
+  - db.collection.insertMany([documents]): Inserts multiple documents into a collection.
+    Example: db.myCollection.insertMany([{name: "Bob", age: 30}, {name: "Charlie", age: 35}])
+
+  4.2 Query Commands
+  ------------------
+  - db.collection.find(query, projection): Finds all documents matching the query with optional projection fields.
+    Example: db.myCollection.find({age: {$gt: 20}})
+  - db.collection.findOne(query): Returns the first document that matches the query.
+    Example: db.myCollection.findOne({name: "Alice"})
+  - db.collection.countDocuments(query): Counts the number of documents matching the query.
+    Example: db.myCollection.countDocuments({status: "Active"})
+
+  4.3 Update Commands
+  -------------------
+  - db.collection.updateOne(filter, update, options): Updates a single document matching the filter criteria.
+    Example: db.myCollection.updateOne({name: "Alice"}, {$set: {age: 26}})
+  - db.collection.updateMany(filter, update, options): Updates multiple documents matching the filter criteria.
+    Example: db.myCollection.updateMany({age: {$lt: 30}}, {$set: {status: "Active"}})
+
+  4.4 Delete Commands
+  -------------------
+  - db.collection.deleteOne(filter): Deletes a single document matching the filter criteria.
+    Example: db.myCollection.deleteOne({name: "Alice"})
+  - db.collection.deleteMany(filter): Deletes all documents matching the filter criteria.
+    Example: db.myCollection.deleteMany({age: {$gt: 30}})
+
+5. Indexing Commands
+--------------------
+- db.collection.createIndex(keys, options): Creates an index on specified fields with optional settings (e.g., unique, sparse).
+  Example: db.myCollection.createIndex({name: 1})
+- db.collection.getIndexes(): Lists all indexes on the collection.
+  Example: db.myCollection.getIndexes()
+- db.collection.dropIndex(indexName): Deletes a specific index from a collection.
+  Example: db.myCollection.dropIndex("name_1")
+
+6. Aggregation Framework Commands
+---------------------------------
+- db.collection.aggregate(pipeline, options): Runs an aggregation pipeline for advanced data analysis.
+  Example: db.myCollection.aggregate([
+    {$match: {age: {$gt: 20}}},
+    {$group: {_id: "$status", count: {$sum: 1}}}
+  ])
+- $match: Filters documents based on a condition.
+- $group: Groups documents by a key and performs aggregations.
+- $sort: Sorts documents by specified fields.
+- $project: Specifies fields to include or exclude in the output.
+- $lookup: Performs a left outer join to another collection.
+- $unwind: Deconstructs an array field into multiple documents.
+
+7. Query Operators
+------------------
+- $eq: Matches values equal to a specified value.
+  Example: db.myCollection.find({status: {$eq: "Active"}})
+- $ne: Matches values not equal to a specified value.
+- $gt: Matches values greater than a specified value.
+- $gte: Matches values greater than or equal to a specified value.
+- $lt: Matches values less than a specified value.
+- $lte: Matches values less than or equal to a specified value.
+- $in: Matches any of the values specified in an array.
+- $nin: Matches none of the values specified in an array.
+- $exists: Matches documents where the field exists or does not exist.
+- $regex: Matches strings using regular expressions.
+
+8. Administrative Commands
+--------------------------
+- db.stats(): Returns statistics about the current database.
+  Example: db.stats()
+- db.collection.stats(): Returns statistics about a specific collection.
+  Example: db.myCollection.stats()
+- db.serverStatus(): Returns detailed information about the server.
+  Example: db.serverStatus()
+- db.isMaster(): Checks the status of the MongoDB server (e.g., primary or secondary).
+  Example: db.isMaster()
+
+9. Backup and Restore Commands
+------------------------------
+- mongodump --db <dbName>: Dumps a backup of the specified database.
+  Example: mongodump --db myDatabase
+- mongorestore --db <dbName> <backupFolder>: Restores a backup of the specified database.
+  Example: mongorestore --db myDatabase /backup/folder
+- mongoexport --collection <collectionName>: Exports collection data to a JSON or CSV file.
+  Example: mongoexport --collection myCollection --out myCollection.json
+- mongoimport --collection <collectionName>: Imports data from a JSON or CSV file into a collection.
+  Example: mongoimport --collection myCollection --file myCollection.json
+
+10. User and Role Management
+----------------------------
+- db.createUser(user): Creates a new user with specified roles.
+  Example: db.createUser({
+    user: "admin",
+    pwd: "password123",
+    roles: [{role: "dbAdmin", db: "admin"}]
+  })
+- db.dropUser(username): Deletes a user from the database.
+  Example: db.dropUser("admin")
+- db.grantRolesToUser(username, roles): Grants additional roles to a user.
+  Example: db.grantRolesToUser("admin", ["readWrite"])
+- db.revokeRolesFromUser(username, roles): Revokes roles from a user.
+  Example: db.revokeRolesFromUser("admin", ["readWrite"])
+
+11. Replica Set and Sharding Commands
+-------------------------------------
+- rs.initiate(): Initiates a replica set.
+  Example: rs.initiate()
+- rs.add(host): Adds a member to the replica set.
+  Example: rs.add("localhost:27018")
+- rs.status(): Displays the status of the replica set.
+  Example: rs.status()
+- sh.status(): Displays the status of the sharded cluster.
+  Example: sh.status()
+- sh.addShard(shard): Adds a shard to the cluster.
+  Example: sh.addShard("shard1/localhost:27018")
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

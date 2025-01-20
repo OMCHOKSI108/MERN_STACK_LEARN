@@ -74,3 +74,5 @@ Under "Database Access", create a new user and keep track of the username and pa
 
 Next, under "Network Access", add your current IP address to allow access from your computer.
 
+
+
